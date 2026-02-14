@@ -1,3 +1,3 @@
 # TODO
 
-- [ ] MINI-2: Use Maintenance JSON Data
+- [ ] HH-MVP-5: Profile Page (Read-Only)
