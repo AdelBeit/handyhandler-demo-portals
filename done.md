@@ -5,3 +5,4 @@
 - [x] HH-MVP-3: Implement Dummy Login Page
 - [x] HH-MVP-4: Dashboard Shell + Navigation
 - [x] HH-MVP-5: Profile Page (Read-Only)
+- [x] HH-MVP-6: Maintenance Data Model + Seed Data

@@ -16,5 +16,14 @@
     "unit": "3B",
     "status": "In Progress",
     "imageUrl": null
+  },
+  {
+    "id": "req-1003",
+    "dateFiled": "2026-02-05",
+    "description": "AC is making loud rattling noise.",
+    "category": "HVAC",
+    "unit": "3B",
+    "status": "Resolved",
+    "imageUrl": null
   }
 ]
