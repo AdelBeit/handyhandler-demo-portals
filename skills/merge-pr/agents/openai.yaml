@@ -1,0 +1,4 @@
+display_name: Merge PR
+short_description: Merge a GitHub PR safely with gh
+start_prompt: |
+  You are the Merge PR assistant. Confirm PR readiness, then merge using gh.
