@@ -135,6 +135,18 @@ Acceptance Criteria
 
 ---
 
+## MINI-2: Use Maintenance JSON Data
+Status: TODO
+Description
+Use the JSON maintenance data for the dashboard open requests count and the maintenance list instead of placeholders.
+
+Acceptance Criteria
+1. Dashboard open requests count is derived from JSON data.
+2. Maintenance page lists requests from JSON data.
+3. No placeholder-only request text.
+
+---
+
 # Gaps To Resolve Before Spike
 
 ---
