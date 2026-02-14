@@ -147,6 +147,18 @@ Acceptance Criteria
 
 ---
 
+## MINI-3: Make Login the Landing Page
+Status: IN PROGRESS
+Description
+Redirect `/` visitors to `/login` so the portal entry point is the dummy login screen before exposing dashboard navigation.
+
+Acceptance Criteria
+1. `/` renders the login form or automatically routes to `/login`.
+2. The redirection preserves query parameters (if any) that might be used later.
+3. README or ticket notes mention that `/login` is the canonical landing page.
+
+---
+
 # Gaps To Resolve Before Spike
 
 ---
