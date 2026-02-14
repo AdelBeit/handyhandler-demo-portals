@@ -125,13 +125,25 @@ Acceptance Criteria
 ---
 
 ## MINI-1: Open Requests View All Button
-Status: IN REVIEW
+Status: DONE
 Description
 Add a View all button on the Open Requests card that links to the maintenance page.
 
 Acceptance Criteria
 1. Button labeled "View all" appears on the Open Requests card.
 2. Clicking navigates to /dashboard/maintenance.
+
+---
+
+## MINI-2: Use Maintenance JSON Data
+Status: IN REVIEW
+Description
+Use the JSON maintenance data for the dashboard open requests count and the maintenance list instead of placeholders.
+
+Acceptance Criteria
+1. Dashboard open requests count is derived from JSON data.
+2. Maintenance page lists requests from JSON data.
+3. No placeholder-only request text.
 
 ---
 
