@@ -27,7 +27,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-3: Implement Dummy Login Page
-Status: IN REVIEW
+Status: DONE
 Description
 Create `/login` with a basic login form that accepts any input and navigates to `/dashboard`.
 
