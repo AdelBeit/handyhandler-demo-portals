@@ -125,7 +125,7 @@ Acceptance Criteria
 ---
 
 ## MINI-1: Open Requests View All Button
-Status: IN PROGRESS
+Status: IN REVIEW
 Description
 Add a View all button on the Open Requests card that links to the maintenance page.
 
