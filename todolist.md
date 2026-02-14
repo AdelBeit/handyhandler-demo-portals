@@ -15,7 +15,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-2: Add DaisyUI + Tailwind Styling
-Status: IN REVIEW
+Status: DONE
 Description
 Install and configure Tailwind CSS with DaisyUI and ensure global styles load.
 
