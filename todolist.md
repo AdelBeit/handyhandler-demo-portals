@@ -157,6 +157,9 @@ Acceptance Criteria
 2. The redirection preserves query parameters (if any) that might be used later.
 3. README or ticket notes mention that `/login` is the canonical landing page.
 
+Notes
+/login is the canonical landing page for the portal.
+
 ---
 
 # Gaps To Resolve Before Spike
