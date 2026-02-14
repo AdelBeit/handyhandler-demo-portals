@@ -3,6 +3,7 @@
 ---
 
 ## HH-MVP-1: Initialize Next.js App Shell
+Status: DONE
 Description
 Set up a Next.js App Router project in this repo with TypeScript, ESLint, and src/ layout.
 
@@ -14,6 +15,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-2: Add DaisyUI + Tailwind Styling
+Status: TODO
 Description
 Install and configure Tailwind CSS with DaisyUI and ensure global styles load.
 
@@ -25,6 +27,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-3: Implement Dummy Login Page
+Status: TODO
 Description
 Create `/login` with a basic login form that accepts any input and navigates to `/dashboard`.
 
@@ -36,6 +39,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-4: Dashboard Shell + Navigation
+Status: TODO
 Description
 Create dashboard shell with header and side navigation linking to Profile and Maintenance.
 
@@ -47,6 +51,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-5: Profile Page (Read-Only)
+Status: TODO
 Description
 Create `/dashboard/profile` showing static tenant profile data.
 
@@ -58,6 +63,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-6: Maintenance Data Model + Seed Data
+Status: TODO
 Description
 Define the maintenance request schema and seed data persisted in JSON.
 
@@ -69,6 +75,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-7: Maintenance API Routes
+Status: TODO
 Description
 Create API routes to list, create, and cancel maintenance requests using JSON storage.
 
@@ -81,6 +88,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-8: Maintenance List Page
+Status: TODO
 Description
 Create `/dashboard/maintenance` that displays requests and allows canceling.
 
@@ -93,6 +101,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-9: New Request Page
+Status: TODO
 Description
 Create `/dashboard/maintenance/new` for submitting a new request.
 
@@ -104,6 +113,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-10: Status Conventions
+Status: TODO
 Description
 Ensure maintenance statuses follow the agreed values and UI reflects them.
 
