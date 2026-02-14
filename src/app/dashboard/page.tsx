@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function DashboardHome() {
   return (
     <div className="space-y-4">
@@ -12,7 +14,15 @@ export default function DashboardHome() {
           <p className="text-sm font-semibold uppercase text-base-content/60">
             Open Requests
           </p>
-          <p className="text-3xl font-semibold">2</p>
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-3xl font-semibold">2</p>
+            <Link
+              className="btn btn-sm btn-outline"
+              href="/dashboard/maintenance"
+            >
+              View all
+            </Link>
+          </div>
         </div>
         <div className="rounded-box bg-base-200 p-4">
           <p className="text-sm font-semibold uppercase text-base-content/60">

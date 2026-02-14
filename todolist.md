@@ -124,6 +124,17 @@ Acceptance Criteria
 
 ---
 
+## MINI-1: Open Requests View All Button
+Status: IN REVIEW
+Description
+Add a View all button on the Open Requests card that links to the maintenance page.
+
+Acceptance Criteria
+1. Button labeled "View all" appears on the Open Requests card.
+2. Clicking navigates to /dashboard/maintenance.
+
+---
+
 # Gaps To Resolve Before Spike
 
 ---
