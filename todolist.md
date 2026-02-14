@@ -51,7 +51,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-5: Profile Page (Read-Only)
-Status: IN PROGRESS
+Status: IN REVIEW
 Description
 Create `/dashboard/profile` showing static tenant profile data.
 
