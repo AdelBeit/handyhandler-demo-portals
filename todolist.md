@@ -136,7 +136,7 @@ Acceptance Criteria
 ---
 
 ## MINI-2: Use Maintenance JSON Data
-Status: TODO
+Status: IN PROGRESS
 Description
 Use the JSON maintenance data for the dashboard open requests count and the maintenance list instead of placeholders.
 
