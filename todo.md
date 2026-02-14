@@ -1,3 +1,3 @@
 # TODO
 
-- [ ] HH-MVP-5: Profile Page (Read-Only)
+- [ ] HH-MVP-6: Maintenance Data Model + Seed Data
