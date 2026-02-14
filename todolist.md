@@ -39,7 +39,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-4: Dashboard Shell + Navigation
-Status: TODO
+Status: IN REVIEW
 Description
 Create dashboard shell with header and side navigation linking to Profile and Maintenance.
 
