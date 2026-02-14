@@ -17,8 +17,12 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "autoprefixer": "^10.4.24",
+    "daisyui": "4.12.12",
     "eslint": "latest",
     "eslint-config-next": "latest",
+    "postcss": "^8.5.6",
+    "tailwindcss": "3.4.17",
     "typescript": "latest"
   }
 }
