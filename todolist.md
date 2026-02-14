@@ -63,7 +63,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-6: Maintenance Data Model + Seed Data
-Status: IN REVIEW
+Status: DONE
 Description
 Define the maintenance request schema and seed data persisted in JSON.
 
