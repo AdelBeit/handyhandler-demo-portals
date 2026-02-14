@@ -1,0 +1,20 @@
+[
+  {
+    "id": "req-1001",
+    "dateFiled": "2026-02-10",
+    "description": "Kitchen sink leak under the cabinet.",
+    "category": "Plumbing",
+    "unit": "3B",
+    "status": "New",
+    "imageUrl": null
+  },
+  {
+    "id": "req-1002",
+    "dateFiled": "2026-02-08",
+    "description": "Bedroom outlet not working.",
+    "category": "Electrical",
+    "unit": "3B",
+    "status": "In Progress",
+    "imageUrl": null
+  }
+]

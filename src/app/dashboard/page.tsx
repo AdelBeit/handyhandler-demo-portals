@@ -1,6 +1,12 @@
 import Link from "next/link";
+import { getMaintenanceRequests } from "@/lib/maintenance";
 
-export default function DashboardHome() {
+export default async function DashboardHome() {
+  const requests = await getMaintenanceRequests();
+  const openCount = requests.filter(
+    (request) => request.status.toLowerCase() !== "resolved"
+  ).length;
+
   return (
     <div className="space-y-4">
       <div>
@@ -15,11 +21,8 @@ export default function DashboardHome() {
             Open Requests
           </p>
           <div className="flex items-center justify-between gap-3">
-            <p className="text-3xl font-semibold">2</p>
-            <Link
-              className="btn btn-sm btn-outline"
-              href="/dashboard/maintenance"
-            >
+            <p className="text-3xl font-semibold">{openCount}</p>
+            <Link className="btn btn-sm btn-outline" href="/dashboard/maintenance">
               View all
             </Link>
           </div>

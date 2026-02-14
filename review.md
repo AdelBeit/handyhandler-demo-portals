@@ -1,5 +1,5 @@
 # IN REVIEW
 
-- [ ] MINI-1: Open Requests View All Button
-  - branch: ticket-mini-1
-  - pr: https://github.com/AdelBeit/handyhandler-demo-portals/pull/6
+- [ ] MINI-2: Use Maintenance JSON Data
+  - branch: ticket-mini-2
+  - pr: https://github.com/AdelBeit/handyhandler-demo-portals/pull/7
