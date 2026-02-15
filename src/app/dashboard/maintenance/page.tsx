@@ -24,8 +24,23 @@ export default function MaintenancePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [showSuccess, setShowSuccess] = useState(
+    searchParams?.get("status") === "created",
+  );
 
   const hasRequests = useMemo(() => requests.length > 0, [requests]);
+
+  useEffect(() => {
+    if (!showSuccess) {
+      return;
+    }
+    const timer = window.setTimeout(() => {
+      setShowSuccess(false);
+    }, 4000);
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [showSuccess]);
 
   useEffect(() => {
     let active = true;
