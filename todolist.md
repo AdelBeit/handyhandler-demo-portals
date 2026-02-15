@@ -187,6 +187,17 @@ Acceptance Criteria
 
 ---
 
+## MINI-5: Add Maintenance Case Number
+Status: TODO
+Description
+Add a case number field to maintenance requests and populate it in seed data.
+
+Acceptance Criteria
+1. Maintenance requests include a case number field in the data model.
+2. Seed data includes a case number for each request.
+
+---
+
 # Gaps To Resolve Before Spike
 
 - G1/G3/G4 removed; handled by current implementation.
