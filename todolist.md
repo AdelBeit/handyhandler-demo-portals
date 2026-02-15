@@ -209,6 +209,17 @@ Acceptance Criteria
 
 ---
 
+## MINI-7: Stabilize Dropzone Loading State
+Status: TODO
+Description
+Avoid layout shift on the new request page by rendering a stable loading state for the dropzone.
+
+Acceptance Criteria
+1. A fixed-size dropzone placeholder renders immediately.
+2. The interactive dropzone replaces it without shifting layout.
+
+---
+
 # Gaps To Resolve Before Spike
 
 - G1/G3/G4 removed; handled by current implementation.
