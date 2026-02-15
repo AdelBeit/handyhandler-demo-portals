@@ -146,7 +146,6 @@ export default function MaintenancePage() {
                 new: 0,
                 resolved: 1,
                 canceled: 2,
-                cancelled: 2,
               };
               const aStatus = a.status.toLowerCase();
               const bStatus = b.status.toLowerCase();
