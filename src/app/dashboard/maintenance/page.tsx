@@ -146,7 +146,9 @@ export default function MaintenancePage() {
               if (categoryDiff !== 0) {
                 return categoryDiff;
               }
-              return b.filedAt.localeCompare(a.filedAt);
+              return (
+                new Date(b.filedAt).getTime() - new Date(a.filedAt).getTime()
+              );
             })
             .map((request) => {
             const statusKey = request.status.toLowerCase();
