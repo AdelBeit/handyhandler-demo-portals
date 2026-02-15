@@ -82,6 +82,7 @@ export default function MaintenancePage() {
           Track and manage your maintenance requests.
         </p>
       </div>
+      <button className="btn btn-primary">Create new request</button>
       {loading ? (
         <div className="rounded-box bg-base-200 p-6 text-sm text-base-content/70">
           Loading requests...
@@ -106,9 +107,6 @@ export default function MaintenancePage() {
               <div key={request.id} className="rounded-box bg-base-200 p-4">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-base-100 text-xs text-base-content/50">
-                      Image
-                    </div>
                     <div>
                       <p className="text-sm font-semibold uppercase text-base-content/60">
                         {request.category} · Unit {request.unit}
@@ -135,12 +133,43 @@ export default function MaintenancePage() {
                     </button>
                   </div>
                 </div>
+                <div className="mt-4">
+                  <p className="text-xs font-semibold uppercase text-base-content/50">
+                    Attachments
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {(() => {
+                      const attachments = Array.isArray(request.imageUrl)
+                        ? request.imageUrl
+                        : request.imageUrl
+                          ? [request.imageUrl]
+                          : [];
+
+                      if (attachments.length === 0) {
+                        return (
+                          <div className="rounded-full bg-base-100 px-3 py-1 text-xs text-base-content/60">
+                            No attachments
+                          </div>
+                        );
+                      }
+
+                      return attachments.map((attachment, index) => (
+                        <div
+                          key={`${request.id}-attachment-${index}`}
+                          className="flex h-12 w-12 items-center justify-center rounded-lg bg-base-100 text-[10px] text-base-content/60"
+                          title={attachment ?? "Attachment"}
+                        >
+                          File
+                        </div>
+                      ));
+                    })()}
+                  </div>
+                </div>
               </div>
             );
           })}
         </div>
       )}
-      <button className="btn btn-primary">Create new request</button>
     </div>
   );
 }

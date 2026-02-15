@@ -6,7 +6,10 @@
     "category": "Plumbing",
     "unit": "3B",
     "status": "New",
-    "imageUrl": null
+    "imageUrl": [
+      "https://placekitten.com/128/128",
+      "https://placekitten.com/129/128"
+    ]
   },
   {
     "id": "req-1002",
@@ -15,7 +18,9 @@
     "category": "Electrical",
     "unit": "3B",
     "status": "In Progress",
-    "imageUrl": null
+    "imageUrl": [
+      "https://placekitten.com/128/129"
+    ]
   },
   {
     "id": "req-1003",
@@ -24,7 +29,11 @@
     "category": "HVAC",
     "unit": "3B",
     "status": "Resolved",
-    "imageUrl": null
+    "imageUrl": [
+      "https://placekitten.com/127/128",
+      "https://placekitten.com/126/128",
+      "https://placekitten.com/128/126"
+    ]
   },
   {
     "id": "req-1771116235993",
