@@ -14,7 +14,7 @@ type CreateRequestPayload = {
   description?: string;
   category?: string;
   unit?: string;
-  imageUrl?: string | null;
+  imageUrl?: string | string[] | null;
 };
 
 export async function GET() {
