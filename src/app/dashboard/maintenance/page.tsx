@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import type { MaintenanceRequest } from "@/lib/maintenance";
 
@@ -16,12 +17,29 @@ export default function MaintenancePage() {
     imageUrl?: string | string[] | null;
   };
 
+  const searchParams = useSearchParams();
+
   const [requests, setRequests] = useState<RequestWithAttachments[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [showSuccess, setShowSuccess] = useState(
+    searchParams?.get("status") === "created",
+  );
 
   const hasRequests = useMemo(() => requests.length > 0, [requests]);
+
+  useEffect(() => {
+    if (!showSuccess) {
+      return;
+    }
+    const timer = window.setTimeout(() => {
+      setShowSuccess(false);
+    }, 4000);
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [showSuccess]);
 
   useEffect(() => {
     let active = true;
@@ -86,7 +104,14 @@ export default function MaintenancePage() {
           Track and manage your maintenance requests.
         </p>
       </div>
-      <button className="btn btn-primary">Create new request</button>
+      <a className="btn btn-primary" href="/dashboard/maintenance/new">
+        Create new request
+      </a>
+      {showSuccess ? (
+        <div className="rounded-box border border-success/30 bg-base-200 p-4 text-sm text-success">
+          Request submitted successfully.
+        </div>
+      ) : null}
       {loading ? (
         <div className="rounded-box bg-base-200 p-6 text-sm text-base-content/70">
           Loading requests...
@@ -101,7 +126,26 @@ export default function MaintenancePage() {
         </div>
       ) : (
         <div className="grid gap-4">
-          {requests.map((request) => {
+          {requests
+            .slice()
+            .sort((a, b) => {
+              const order: Record<string, number> = {
+                new: 0,
+                "in progress": 1,
+                resolved: 2,
+                canceled: 3,
+                cancelled: 3,
+              };
+              const aStatus = a.status.toLowerCase();
+              const bStatus = b.status.toLowerCase();
+              const statusDiff =
+                (order[aStatus] ?? 99) - (order[bStatus] ?? 99);
+              if (statusDiff !== 0) {
+                return statusDiff;
+              }
+              return b.dateFiled.localeCompare(a.dateFiled);
+            })
+            .map((request) => {
             const statusKey = request.status.toLowerCase();
             const badgeClass = statusStyles[statusKey] ?? "badge-ghost";
             const isCanceled = statusKey === "canceled";
@@ -127,14 +171,16 @@ export default function MaintenancePage() {
                     <span className={`badge ${badgeClass}`}>
                       {request.status}
                     </span>
-                    <button
-                      className="btn btn-sm btn-outline"
-                      type="button"
-                      disabled={isCanceled || isResolved || busyId === request.id}
-                      onClick={() => handleCancel(request.id)}
-                    >
-                      {busyId === request.id ? "Canceling..." : "Cancel"}
-                    </button>
+                    {!isResolved ? (
+                      <button
+                        className="btn btn-sm btn-outline"
+                        type="button"
+                        disabled={isCanceled || busyId === request.id}
+                        onClick={() => handleCancel(request.id)}
+                      >
+                        {busyId === request.id ? "Canceling..." : "Cancel"}
+                      </button>
+                    ) : null}
                   </div>
                 </div>
                 <div className="mt-4">
@@ -157,21 +203,28 @@ export default function MaintenancePage() {
                         );
                       }
 
-                      return attachments.map((attachment, index) => (
+                      return attachments.map((attachment, index) => {
+                        const normalized =
+                          attachment && !attachment.startsWith("/") && !attachment.startsWith("http")
+                            ? `/images/${attachment}`
+                            : attachment;
+
+                        return (
                         <div
                           key={`${request.id}-attachment-${index}`}
                           className="h-12 w-12 overflow-hidden rounded-lg bg-base-100"
-                          title={attachment ?? "Attachment"}
+                          title={normalized ?? "Attachment"}
                         >
                           <img
-                            src={attachment}
+                            src={normalized}
                             alt="Attachment thumbnail"
                             className="h-full w-full object-cover"
                             loading="lazy"
                             referrerPolicy="no-referrer"
                           />
                         </div>
-                      ));
+                      );
+                      });
                     })()}
                   </div>
                 </div>

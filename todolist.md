@@ -101,7 +101,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-9: New Request Page
-Status: TODO
+Status: IN REVIEW
 Description
 Create `/dashboard/maintenance/new` for submitting a new request.
 
@@ -121,6 +121,19 @@ Acceptance Criteria
 1. Valid statuses are `New`, `Resolved`, `Canceled`.
 2. New requests default to `New`.
 3. Status badge color reflects status.
+
+---
+
+## HH-MVP-11: Attachment Uploads (Demo Storage)
+Status: TODO
+Description
+Allow uploading attachment images and store them locally for demo usage.
+
+Acceptance Criteria
+1. New request flow uploads image files to `public/uploads`.
+2. API returns a public URL (e.g., `/uploads/<filename>`).
+3. Maintenance requests store the uploaded URL and display thumbnails.
+4. Implementation clearly notes demo-only local storage.
 
 ---
 

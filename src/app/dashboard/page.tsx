@@ -35,8 +35,12 @@ export default async function DashboardHome() {
         </div>
       </div>
       <div className="flex flex-wrap gap-3">
-        <button className="btn btn-primary">New maintenance request</button>
-        <button className="btn btn-outline">View profile</button>
+        <Link className="btn btn-primary" href="/dashboard/maintenance/new">
+          New maintenance request
+        </Link>
+        <Link className="btn btn-outline" href="/dashboard/profile">
+          View profile
+        </Link>
       </div>
     </div>
   );
