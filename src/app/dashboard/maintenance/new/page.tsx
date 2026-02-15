@@ -25,6 +25,21 @@ export default function NewMaintenanceRequestPage() {
     setError(null);
 
     try {
+      let uploadedUrl: string | null = null;
+      if (attachments.length > 0) {
+        const formData = new FormData();
+        formData.append("file", attachments[0]);
+        const uploadRes = await fetch("/api/maintenance/upload", {
+          method: "POST",
+          body: formData,
+        });
+        if (!uploadRes.ok) {
+          throw new Error(`Upload failed (${uploadRes.status}).`);
+        }
+        const uploadPayload = (await uploadRes.json()) as { url?: string };
+        uploadedUrl = uploadPayload.url ?? null;
+      }
+
       const response = await fetch("/api/maintenance", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -32,8 +47,7 @@ export default function NewMaintenanceRequestPage() {
           description,
           category,
           unit,
-          imageUrl:
-            attachments.length > 0 ? `/images/${attachments[0].name}` : null,
+          imageUrl: uploadedUrl,
         }),
       });
 
