@@ -12,7 +12,11 @@ const statusStyles: Record<string, string> = {
 };
 
 export default function MaintenancePage() {
-  const [requests, setRequests] = useState<MaintenanceRequest[]>([]);
+  type RequestWithAttachments = MaintenanceRequest & {
+    imageUrl?: string | string[] | null;
+  };
+
+  const [requests, setRequests] = useState<RequestWithAttachments[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -30,7 +34,7 @@ export default function MaintenancePage() {
         if (!res.ok) {
           throw new Error(`Failed to load requests (${res.status}).`);
         }
-        const data = (await res.json()) as MaintenanceRequest[];
+        const data = (await res.json()) as RequestWithAttachments[];
         if (active) {
           setRequests(data);
           setError(null);
@@ -63,7 +67,7 @@ export default function MaintenancePage() {
       if (!res.ok) {
         throw new Error(`Cancel failed (${res.status}).`);
       }
-      const updated = (await res.json()) as MaintenanceRequest;
+      const updated = (await res.json()) as RequestWithAttachments;
       setRequests((prev) =>
         prev.map((item) => (item.id === id ? updated : item)),
       );
@@ -156,10 +160,16 @@ export default function MaintenancePage() {
                       return attachments.map((attachment, index) => (
                         <div
                           key={`${request.id}-attachment-${index}`}
-                          className="flex h-12 w-12 items-center justify-center rounded-lg bg-base-100 text-[10px] text-base-content/60"
+                          className="h-12 w-12 overflow-hidden rounded-lg bg-base-100"
                           title={attachment ?? "Attachment"}
                         >
-                          File
+                          <img
+                            src={attachment}
+                            alt="Attachment thumbnail"
+                            className="h-full w-full object-cover"
+                            loading="lazy"
+                            referrerPolicy="no-referrer"
+                          />
                         </div>
                       ));
                     })()}

@@ -7,8 +7,8 @@
     "unit": "3B",
     "status": "New",
     "imageUrl": [
-      "https://placekitten.com/128/128",
-      "https://placekitten.com/129/128"
+      "/images/leakyfaucet.png",
+      "/images/leakyfaucet.png"
     ]
   },
   {
@@ -19,7 +19,7 @@
     "unit": "3B",
     "status": "In Progress",
     "imageUrl": [
-      "https://placekitten.com/128/129"
+      "/images/leakyfaucet.png"
     ]
   },
   {
@@ -30,9 +30,9 @@
     "unit": "3B",
     "status": "Resolved",
     "imageUrl": [
-      "https://placekitten.com/127/128",
-      "https://placekitten.com/126/128",
-      "https://placekitten.com/128/126"
+      "/images/leakyfaucet.png",
+      "/images/leakyfaucet.png",
+      "/images/leakyfaucet.png"
     ]
   },
   {
