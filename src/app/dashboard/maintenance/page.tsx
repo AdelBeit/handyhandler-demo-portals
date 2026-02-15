@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import type { MaintenanceRequest } from "@/lib/maintenance";
 
@@ -15,6 +16,9 @@ export default function MaintenancePage() {
   type RequestWithAttachments = MaintenanceRequest & {
     imageUrl?: string | string[] | null;
   };
+
+  const searchParams = useSearchParams();
+  const showSuccess = searchParams?.get("status") === "created";
 
   const [requests, setRequests] = useState<RequestWithAttachments[]>([]);
   const [loading, setLoading] = useState(true);
@@ -86,7 +90,14 @@ export default function MaintenancePage() {
           Track and manage your maintenance requests.
         </p>
       </div>
-      <button className="btn btn-primary">Create new request</button>
+      <a className="btn btn-primary" href="/dashboard/maintenance/new">
+        Create new request
+      </a>
+      {showSuccess ? (
+        <div className="rounded-box border border-success/30 bg-base-200 p-4 text-sm text-success">
+          Request submitted successfully.
+        </div>
+      ) : null}
       {loading ? (
         <div className="rounded-box bg-base-200 p-6 text-sm text-base-content/70">
           Loading requests...
@@ -101,7 +112,26 @@ export default function MaintenancePage() {
         </div>
       ) : (
         <div className="grid gap-4">
-          {requests.map((request) => {
+          {requests
+            .slice()
+            .sort((a, b) => {
+              const order: Record<string, number> = {
+                new: 0,
+                "in progress": 1,
+                resolved: 2,
+                canceled: 3,
+                cancelled: 3,
+              };
+              const aStatus = a.status.toLowerCase();
+              const bStatus = b.status.toLowerCase();
+              const statusDiff =
+                (order[aStatus] ?? 99) - (order[bStatus] ?? 99);
+              if (statusDiff !== 0) {
+                return statusDiff;
+              }
+              return b.dateFiled.localeCompare(a.dateFiled);
+            })
+            .map((request) => {
             const statusKey = request.status.toLowerCase();
             const badgeClass = statusStyles[statusKey] ?? "badge-ghost";
             const isCanceled = statusKey === "canceled";
@@ -127,14 +157,16 @@ export default function MaintenancePage() {
                     <span className={`badge ${badgeClass}`}>
                       {request.status}
                     </span>
-                    <button
-                      className="btn btn-sm btn-outline"
-                      type="button"
-                      disabled={isCanceled || isResolved || busyId === request.id}
-                      onClick={() => handleCancel(request.id)}
-                    >
-                      {busyId === request.id ? "Canceling..." : "Cancel"}
-                    </button>
+                    {!isResolved ? (
+                      <button
+                        className="btn btn-sm btn-outline"
+                        type="button"
+                        disabled={isCanceled || busyId === request.id}
+                        onClick={() => handleCancel(request.id)}
+                      >
+                        {busyId === request.id ? "Canceling..." : "Cancel"}
+                      </button>
+                    ) : null}
                   </div>
                 </div>
                 <div className="mt-4">

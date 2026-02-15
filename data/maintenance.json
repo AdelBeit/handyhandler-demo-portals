@@ -34,23 +34,5 @@
       "/images/leakyfaucet.png",
       "/images/leakyfaucet.png"
     ]
-  },
-  {
-    "id": "req-1771116235993",
-    "dateFiled": "2026-02-15",
-    "description": "Smoke test request",
-    "category": "Plumbing",
-    "unit": "3B",
-    "status": "Canceled",
-    "imageUrl": null
-  },
-  {
-    "id": "req-1771116242508",
-    "dateFiled": "2026-02-15",
-    "description": "Smoke test request",
-    "category": "Plumbing",
-    "unit": "3B",
-    "status": "Canceled",
-    "imageUrl": null
   }
 ]
