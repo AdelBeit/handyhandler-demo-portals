@@ -14,7 +14,7 @@ Acceptance Criteria
 ---
 
 ## MINI-10: Multi-Attachment Uploads & Review
-Status: IN PROGRESS
+Status: IN REVIEW
 Description
 Allow attaching and submitting multiple files, show all attachments pre-submit, and allow removing attachments before submit.
 
