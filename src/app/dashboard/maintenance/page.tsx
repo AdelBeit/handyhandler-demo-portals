@@ -142,9 +142,18 @@ export default function MaintenancePage() {
           {requests
             .slice()
             .sort((a, b) => {
-              const categoryDiff = a.category.localeCompare(b.category);
-              if (categoryDiff !== 0) {
-                return categoryDiff;
+              const order: Record<string, number> = {
+                new: 0,
+                resolved: 1,
+                canceled: 2,
+                cancelled: 2,
+              };
+              const aStatus = a.status.toLowerCase();
+              const bStatus = b.status.toLowerCase();
+              const statusDiff =
+                (order[aStatus] ?? 99) - (order[bStatus] ?? 99);
+              if (statusDiff !== 0) {
+                return statusDiff;
               }
               return (
                 new Date(b.filedAt).getTime() - new Date(a.filedAt).getTime()
