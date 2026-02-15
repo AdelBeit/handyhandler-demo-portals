@@ -189,22 +189,5 @@ Acceptance Criteria
 
 # Gaps To Resolve Before Spike
 
----
-
-## G1: Portal Name
-- Confirm final portal name (placeholder currently “HarborGate Property Management”).
-
----
-
-## G2: API Route Shape
-- Confirm whether to use `PATCH /api/maintenance/:id` or `POST /api/maintenance/cancel`.
-
----
-
-## G3: JSON Storage Location
-- Confirm the exact file path for JSON storage (`data/maintenance.json`).
-
----
-
-## G4: Image Placeholder
-- Confirm whether to use a static placeholder image URL or a local asset.
+- G1/G3/G4 removed; handled by current implementation.
+- G2: API route shape was decided (`PATCH /api/maintenance/:id`).
