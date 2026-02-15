@@ -199,7 +199,7 @@ Acceptance Criteria
 ---
 
 ## MINI-6: Hide Cancel Button When Ineligible
-Status: IN PROGRESS
+Status: IN REVIEW
 Description
 Hide the Cancel action when a maintenance request is not eligible for cancellation (e.g., already canceled or resolved).
 
