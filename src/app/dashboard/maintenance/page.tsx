@@ -183,11 +183,11 @@ export default function MaintenancePage() {
                     <span className={`badge ${badgeClass}`}>
                       {request.status}
                     </span>
-                    {!isResolved ? (
+                    {!isResolved && !isCanceled ? (
                       <button
                         className="btn btn-sm btn-outline"
                         type="button"
-                        disabled={isCanceled || busyId === request.id}
+                        disabled={busyId === request.id}
                         onClick={() => handleCancel(request.id)}
                       >
                         {busyId === request.id ? "Canceling..." : "Cancel"}
