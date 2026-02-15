@@ -3,7 +3,7 @@
 ---
 
 ## MINI-9: Sort Requests by Date Desc
-Status: IN REVIEW
+Status: DONE
 Description
 Ensure maintenance requests are grouped by category and then sorted newest to oldest by timestamp within each category.
 
