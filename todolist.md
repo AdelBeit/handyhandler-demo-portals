@@ -176,7 +176,7 @@ Notes
 ---
 
 ## MINI-4: Store Timestamps for Maintenance Requests
-Status: IN REVIEW
+Status: DONE
 Description
 Store request timestamps with date and time (e.g., ISO 8601) so the UI can format as needed (including hours/minutes and AM/PM).
 
