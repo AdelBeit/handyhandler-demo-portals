@@ -75,7 +75,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-7: Maintenance API Routes
-Status: TODO
+Status: IN PROGRESS
 Description
 Create API routes to list, create, and cancel maintenance requests using JSON storage.
 
