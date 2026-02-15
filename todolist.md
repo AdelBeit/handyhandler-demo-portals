@@ -101,7 +101,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-9: New Request Page
-Status: IN REVIEW
+Status: DONE
 Description
 Create `/dashboard/maintenance/new` for submitting a new request.
 
