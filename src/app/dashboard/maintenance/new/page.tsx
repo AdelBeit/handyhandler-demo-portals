@@ -1,31 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+
+const DropzoneLoading = () => (
+  <div className="flex flex-col items-center justify-center rounded-box border border-dashed border-base-content/20 bg-base-200 p-6 text-center text-sm text-base-content/60">
+    <span className="font-semibold text-base-content">Loading uploader...</span>
+    <span>Please wait</span>
+  </div>
+);
+
+const AttachmentDropzone = dynamic(
+  () => import("@/components/AttachmentDropzone"),
+  {
+    ssr: false,
+    loading: DropzoneLoading,
+  },
+);
 
 const categories = ["Plumbing", "Electrical", "HVAC", "Appliance"] as const;
 
 export default function NewMaintenanceRequestPage() {
   const router = useRouter();
-  const AttachmentDropzone = dynamic(
-    () => import("@/components/AttachmentDropzone"),
-    {
-      ssr: false,
-      loading: () => (
-        <div className="flex flex-col items-center justify-center rounded-box border border-dashed border-base-content/20 bg-base-200 p-6 text-center text-sm text-base-content/60">
-          <span className="font-semibold text-base-content">Loading uploader...</span>
-          <span>Please wait</span>
-        </div>
-      ),
-    },
-  );
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState(categories[0]);
   const [attachments, setAttachments] = useState<File[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const unit = "3B";
+  const handleFilesChange = useCallback((files: File[]) => {
+    setAttachments(files);
+  }, []);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -128,7 +134,7 @@ export default function NewMaintenanceRequestPage() {
           <div className="label">
             <span className="label-text">Attachments (optional)</span>
           </div>
-          <AttachmentDropzone onFilesChange={setAttachments} />
+          <AttachmentDropzone onFilesChange={handleFilesChange} />
           <div className="mt-2 text-sm text-base-content/60">
             {attachments.length > 0 ? (
               <ul className="list-disc pl-5">

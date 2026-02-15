@@ -1,13 +1,13 @@
 "use client";
 
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
 type AttachmentDropzoneProps = {
   onFilesChange: (files: File[]) => void;
 };
 
-export default function AttachmentDropzone({
+function AttachmentDropzone({
   onFilesChange,
 }: AttachmentDropzoneProps) {
   const onDrop = useCallback(
@@ -43,3 +43,5 @@ export default function AttachmentDropzone({
     </div>
   );
 }
+
+export default memo(AttachmentDropzone);
