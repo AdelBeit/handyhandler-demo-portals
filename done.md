@@ -17,4 +17,3 @@
 - [x] MINI-7: Stabilize Dropzone Loading State
 - [x] MINI-8: Reduce Dropzone Re-renders
 - [x] MINI-3: Make Login the Landing Page
-- [x] MINI-9: Sort Requests by Date Desc
