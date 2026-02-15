@@ -9,7 +9,8 @@
     "imageUrl": [
       "/images/leakyfaucet.png",
       "/images/leakyfaucet.png"
-    ]
+    ],
+    "caseNumber": "CASE-1"
   },
   {
     "id": "req-1002",
@@ -20,7 +21,8 @@
     "status": "New",
     "imageUrl": [
       "/images/leakyfaucet.png"
-    ]
+    ],
+    "caseNumber": "CASE-2"
   },
   {
     "id": "req-1003",
@@ -33,7 +35,8 @@
       "/images/leakyfaucet.png",
       "/images/leakyfaucet.png",
       "/images/leakyfaucet.png"
-    ]
+    ],
+    "caseNumber": "CASE-3"
   },
   {
     "id": "req-1771119397846",
@@ -42,7 +45,8 @@
     "category": "Plumbing",
     "unit": "3B",
     "status": "Canceled",
-    "imageUrl": "/images/leakyfaucet.png"
+    "imageUrl": "/images/leakyfaucet.png",
+    "caseNumber": "CASE-4"
   },
   {
     "id": "req-1771119449881",
@@ -51,11 +55,12 @@
     "category": "Plumbing",
     "unit": "3B",
     "status": "Canceled",
-    "imageUrl": "/images/leakyfaucet.png"
+    "imageUrl": "/images/leakyfaucet.png",
+    "caseNumber": "CASE-5"
   },
   {
     "id": "req-1771126898384",
-    "caseNumber": "CASE-1",
+    "caseNumber": "CASE-6",
     "filedAt": "2026-02-15T22:34:00Z",
     "description": "spiders in my shoes",
     "category": "Plumbing",
