@@ -1,17 +1,6 @@
 import { NextResponse } from "next/server";
 
-const clearSessionCookie = (response: NextResponse) => {
-  response.cookies.set({
-    name: "demo_auth",
-    value: "",
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: 0,
-  });
-  return response;
-};
+import { clearSessionCookie } from "@/lib/auth";
 
 export async function GET(request: Request) {
   const url = new URL("/login", request.url);

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { createSessionToken } from "@/lib/auth";
+import { createSessionToken, setSessionCookie } from "@/lib/auth";
 
 type LoginPayload = {
   email?: string;
@@ -21,14 +21,5 @@ export async function POST(request: Request) {
 
   const token = await createSessionToken(email);
   const response = NextResponse.json({ ok: true });
-  response.cookies.set({
-    name: "demo_auth",
-    value: token,
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 7,
-  });
-  return response;
+  return setSessionCookie(response, token);
 }

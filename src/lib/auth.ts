@@ -1,6 +1,17 @@
 const encoder = new TextEncoder();
 const DEFAULT_SECRET = "demo-auth-secret";
 
+export const SESSION_COOKIE_NAME = "demo_auth";
+export const SESSION_TTL_SECONDS = 60 * 60 * 24 * 7;
+
+export const buildSessionCookieOptions = (maxAgeSeconds = SESSION_TTL_SECONDS) => ({
+  httpOnly: true,
+  sameSite: "lax" as const,
+  secure: process.env.NODE_ENV === "production",
+  path: "/",
+  maxAge: maxAgeSeconds,
+});
+
 type SessionPayload = {
   sub: string;
   exp: number;
@@ -32,14 +43,19 @@ const base64UrlDecode = (value: string) => {
   return atob(base64);
 };
 
-const getSigningKey = async () => {
-  return crypto.subtle.importKey(
-    "raw",
-    encoder.encode(getSecret()),
-    { name: "HMAC", hash: "SHA-256" },
-    false,
-    ["sign", "verify"],
-  );
+let signingKeyPromise: Promise<CryptoKey> | null = null;
+
+const getSigningKey = () => {
+  if (!signingKeyPromise) {
+    signingKeyPromise = crypto.subtle.importKey(
+      "raw",
+      encoder.encode(getSecret()),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["sign", "verify"],
+    );
+  }
+  return signingKeyPromise;
 };
 
 const signPayload = async (payload: string) => {
@@ -48,7 +64,10 @@ const signPayload = async (payload: string) => {
   return base64UrlEncode(new Uint8Array(signature));
 };
 
-export const createSessionToken = async (email: string, ttlSeconds = 60 * 60 * 24 * 7) => {
+export const createSessionToken = async (
+  email: string,
+  ttlSeconds = SESSION_TTL_SECONDS,
+) => {
   const payload: SessionPayload = {
     sub: email,
     exp: Date.now() + ttlSeconds * 1000,
@@ -77,4 +96,37 @@ export const verifySessionToken = async (token: string) => {
     return null;
   }
   return payload;
+};
+
+type CookieSetter = {
+  cookies: {
+    set: (options: {
+      name: string;
+      value: string;
+      httpOnly: boolean;
+      sameSite: "lax" | "strict" | "none";
+      secure: boolean;
+      path: string;
+      maxAge?: number;
+    }) => void;
+  };
+};
+
+export const setSessionCookie = (response: CookieSetter, token: string) => {
+  response.cookies.set({
+    name: SESSION_COOKIE_NAME,
+    value: token,
+    ...buildSessionCookieOptions(),
+  });
+  return response;
+};
+
+export const clearSessionCookie = (response: CookieSetter) => {
+  response.cookies.set({
+    name: SESSION_COOKIE_NAME,
+    value: "",
+    ...buildSessionCookieOptions(0),
+    maxAge: 0,
+  });
+  return response;
 };
