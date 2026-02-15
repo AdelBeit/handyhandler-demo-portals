@@ -7,8 +7,8 @@ import type { MaintenanceRequest } from "@/lib/maintenance";
 
 const statusStyles: Record<string, string> = {
   new: "badge-primary",
-  resolved: "badge-ghost",
-  canceled: "badge-outline",
+  resolved: "badge-success",
+  canceled: "badge-error",
 };
 
 export default function MaintenancePage() {
