@@ -21,6 +21,17 @@ Acceptance Criteria
 
 ---
 
+## MINI-9: Sort Requests by Date Desc
+Status: TODO
+Description
+Ensure maintenance requests are sorted newest to oldest by timestamp in the list view.
+
+Acceptance Criteria
+1. Sorting uses the timestamp field and is descending.
+2. List renders newest requests first.
+
+---
+
 ## Backlog & Notes
 
 # Portal Demo Backlog (Gaps & Extensions)
