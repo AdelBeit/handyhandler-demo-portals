@@ -38,7 +38,7 @@ App Structure
 Data Model
 MaintenanceRequest
 - id: string
-- dateFiled: ISO string
+- filedAt: ISO string
 - description: string
 - category: string
 - unit: string

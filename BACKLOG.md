@@ -34,7 +34,7 @@ MVP scope note: single portal only. Multi-portal selector, branding variants, an
 ---
 
 ## Maintenance Requests Data Model
-- Required fields: description, date filed, status, image attachments.
+- Required fields: description, filed at timestamp, status, image attachments.
 - Additional fields to choose: priority, category, unit/location, contact preference, preferred entry time.
 - Define valid status values (e.g., New, In Progress, Scheduled, Resolved).
 

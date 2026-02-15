@@ -70,7 +70,7 @@ Define the maintenance request schema and seed data persisted in JSON.
 Acceptance Criteria
 1. `data/maintenance.json` (or similar) stores an array of maintenance requests.
 2. Seed file contains 3 realistic requests.
-3. Each request includes id, dateFiled, description, category, unit, status, imageUrl.
+3. Each request includes id, filedAt, description, category, unit, status, imageUrl.
 
 ---
 
