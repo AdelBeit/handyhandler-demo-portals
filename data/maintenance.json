@@ -67,5 +67,18 @@
     "unit": "3B",
     "status": "New",
     "imageUrl": "/uploads/d446ece8-e708-43f0-b206-83d31e797ec0.jpeg"
+  },
+  {
+    "id": "req-1771189883034",
+    "caseNumber": "CASE-7",
+    "filedAt": "2026-02-15T21:11:23.034Z",
+    "description": "dropped my croissant",
+    "category": "HVAC",
+    "unit": "3B",
+    "status": "New",
+    "imageUrl": [
+      "/uploads/51a8eb07-3b24-4c14-8b94-85c152d32768.jpeg",
+      "/uploads/13b4fcaf-5051-4b49-88b3-939a0bf7a24f.jpg"
+    ]
   }
 ]
