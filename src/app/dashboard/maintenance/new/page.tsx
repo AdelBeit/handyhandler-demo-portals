@@ -1,13 +1,17 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useDropzone } from "react-dropzone";
+import dynamic from "next/dynamic";
 
 const categories = ["Plumbing", "Electrical", "HVAC", "Appliance"] as const;
 
 export default function NewMaintenanceRequestPage() {
   const router = useRouter();
+  const AttachmentDropzone = dynamic(
+    () => import("@/components/AttachmentDropzone"),
+    { ssr: false },
+  );
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState(categories[0]);
   const [attachments, setAttachments] = useState<File[]>([]);
@@ -28,7 +32,7 @@ export default function NewMaintenanceRequestPage() {
           description,
           category,
           unit,
-          imageUrl: attachments[0]?.name ?? null,
+          imageUrl: attachments.length > 0 ? "/images/leakyfaucet.png" : null,
         }),
       });
 
@@ -45,18 +49,6 @@ export default function NewMaintenanceRequestPage() {
       setSubmitting(false);
     }
   };
-
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    if (acceptedFiles.length > 0) {
-      setAttachments(acceptedFiles);
-    }
-  }, []);
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: { "image/*": [] },
-    multiple: true,
-  });
 
   return (
     <div className="space-y-6">
@@ -113,21 +105,7 @@ export default function NewMaintenanceRequestPage() {
           <div className="label">
             <span className="label-text">Attachments (optional)</span>
           </div>
-          <div
-            {...getRootProps({
-              className:
-                "flex cursor-pointer flex-col items-center justify-center rounded-box border border-dashed bg-base-200 p-6 text-center text-sm text-base-content/60 hover:border-base-content/40 " +
-                (isDragActive
-                  ? "border-primary/70 bg-primary/10"
-                  : "border-base-content/20"),
-            })}
-          >
-            <input {...getInputProps()} />
-            <span className="font-semibold text-base-content">
-              {isDragActive ? "Drop files to attach" : "Drop files here"}
-            </span>
-            <span>or click to upload</span>
-          </div>
+          <AttachmentDropzone onFilesChange={setAttachments} />
           <div className="mt-2 text-sm text-base-content/60">
             {attachments.length > 0 ? (
               <ul className="list-disc pl-5">

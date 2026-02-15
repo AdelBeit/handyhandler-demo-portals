@@ -18,7 +18,6 @@ export default function MaintenancePage() {
   };
 
   const searchParams = useSearchParams();
-  const showSuccess = searchParams?.get("status") === "created";
 
   const [requests, setRequests] = useState<RequestWithAttachments[]>([]);
   const [loading, setLoading] = useState(true);
@@ -204,21 +203,28 @@ export default function MaintenancePage() {
                         );
                       }
 
-                      return attachments.map((attachment, index) => (
+                      return attachments.map((attachment, index) => {
+                        const normalized =
+                          attachment && !attachment.startsWith("/") && !attachment.startsWith("http")
+                            ? `/images/${attachment}`
+                            : attachment;
+
+                        return (
                         <div
                           key={`${request.id}-attachment-${index}`}
                           className="h-12 w-12 overflow-hidden rounded-lg bg-base-100"
-                          title={attachment ?? "Attachment"}
+                          title={normalized ?? "Attachment"}
                         >
                           <img
-                            src={attachment}
+                            src={normalized}
                             alt="Attachment thumbnail"
                             className="h-full w-full object-cover"
                             loading="lazy"
                             referrerPolicy="no-referrer"
                           />
                         </div>
-                      ));
+                      );
+                      });
                     })()}
                   </div>
                 </div>
