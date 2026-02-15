@@ -24,11 +24,11 @@ Acceptance Criteria
 ## MINI-9: Sort Requests by Date Desc
 Status: TODO
 Description
-Ensure maintenance requests are sorted newest to oldest by timestamp in the list view.
+Ensure maintenance requests are grouped by category and then sorted newest to oldest by timestamp within each category.
 
 Acceptance Criteria
-1. Sorting uses the timestamp field and is descending.
-2. List renders newest requests first.
+1. Primary sort is category (alphabetical).
+2. Secondary sort uses the timestamp field and is descending.
 
 ---
 
