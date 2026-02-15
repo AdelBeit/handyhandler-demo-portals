@@ -2,6 +2,16 @@
 
 ## Active TODO
 
+## AUTH-1: Require Authenticated Sessions
+Status: TODO
+Description
+Block unauthenticated users from accessing dashboard routes; require login to view `/dashboard/*`.
+
+Acceptance Criteria
+1. Unauthenticated users are redirected to `/login` when visiting dashboard routes.
+2. Authenticated users can access dashboard routes without manual redirects.
+3. Session persists across refreshes for a reasonable duration.
+
 ## Backlog & Notes
 
 # Portal Demo Backlog (Gaps & Extensions)
@@ -65,13 +75,6 @@ MVP scope note: single portal only. Multi-portal selector, branding variants, an
 - Provide 3–5 seeded requests per portal (names, dates, statuses, descriptions).
 - Provide consistent units/locations (e.g., “Unit 3B”) to make lists realistic.
 - Decide on placeholder images or branded maintenance icons.
-
----
-
-## Accessibility & Responsiveness
-- Define mobile layout for login and dashboard.
-- Decide on keyboard navigation for menus and list items.
-- Ensure contrast targets per portal theme.
 
 ---
 
