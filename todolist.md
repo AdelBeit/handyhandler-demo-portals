@@ -113,7 +113,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-10: Status Conventions
-Status: TODO
+Status: IN PROGRESS
 Description
 Ensure maintenance statuses follow the agreed values and UI reflects them.
 
