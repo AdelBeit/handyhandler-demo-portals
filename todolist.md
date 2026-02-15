@@ -124,6 +124,19 @@ Acceptance Criteria
 
 ---
 
+## HH-MVP-11: Attachment Uploads (Demo Storage)
+Status: TODO
+Description
+Allow uploading attachment images and store them locally for demo usage.
+
+Acceptance Criteria
+1. New request flow uploads image files to `public/uploads`.
+2. API returns a public URL (e.g., `/uploads/<filename>`).
+3. Maintenance requests store the uploaded URL and display thumbnails.
+4. Implementation clearly notes demo-only local storage.
+
+---
+
 ## MINI-1: Open Requests View All Button
 Status: DONE
 Description

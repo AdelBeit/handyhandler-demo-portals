@@ -32,7 +32,8 @@ export default function NewMaintenanceRequestPage() {
           description,
           category,
           unit,
-          imageUrl: attachments.length > 0 ? "/images/leakyfaucet.png" : null,
+          imageUrl:
+            attachments.length > 0 ? `/images/${attachments[0].name}` : null,
         }),
       });
 

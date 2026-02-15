@@ -34,5 +34,23 @@
       "/images/leakyfaucet.png",
       "/images/leakyfaucet.png"
     ]
+  },
+  {
+    "id": "req-1771119397846",
+    "dateFiled": "2026-02-15",
+    "description": "there's a spider in my shoes",
+    "category": "Plumbing",
+    "unit": "3B",
+    "status": "Canceled",
+    "imageUrl": "/images/leakyfaucet.png"
+  },
+  {
+    "id": "req-1771119449881",
+    "dateFiled": "2026-02-15",
+    "description": "there's a spider in my shoes",
+    "category": "Plumbing",
+    "unit": "3B",
+    "status": "New",
+    "imageUrl": "/images/leakyfaucet.png"
   }
 ]
