@@ -15,7 +15,7 @@ Scope & Constraints
 - Dummy login; any input redirects to dashboard.
 - No real auth/session gating or per-user data.
 - New Request is a dedicated page (not modal).
-- Image handling is placeholder or URL string.
+- Demo image uploads are stored locally in `public/uploads` and referenced by URL.
 
 Key Decisions (Locked)
 - Styling: DaisyUI (Tailwind-based).
@@ -43,7 +43,7 @@ MaintenanceRequest
 - category: string
 - unit: string
 - status: New | Resolved | Canceled
-- imageUrl: string | null
+- imageUrl: string | string[] | null
 
 Profile
 - Read-only static JSON: name, email, phone, unit, address, leaseEndDate
@@ -55,10 +55,7 @@ Behavior & Flow
 - Cancel action updates status to Canceled via API; list updates without page refresh.
 
 Seed Data
-- 3 realistic maintenance requests:
-  - Example categories: Plumbing, Electrical, Appliance.
-  - Example descriptions: “Kitchen sink leak,” “Bedroom outlet not working,” “AC making noise.”
-  - Mix of statuses across New and Resolved.
+- Demo seed file currently contains a single canceled request.
 
 DaisyUI Usage
 - Use standard components: navbar, menu, card, badge, button, input, textarea, select.
