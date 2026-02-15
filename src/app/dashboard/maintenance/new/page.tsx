@@ -10,7 +10,15 @@ export default function NewMaintenanceRequestPage() {
   const router = useRouter();
   const AttachmentDropzone = dynamic(
     () => import("@/components/AttachmentDropzone"),
-    { ssr: false },
+    {
+      ssr: false,
+      loading: () => (
+        <div className="flex flex-col items-center justify-center rounded-box border border-dashed border-base-content/20 bg-base-200 p-6 text-center text-sm text-base-content/60">
+          <span className="font-semibold text-base-content">Loading uploader...</span>
+          <span>Please wait</span>
+        </div>
+      ),
+    },
   );
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState(categories[0]);
