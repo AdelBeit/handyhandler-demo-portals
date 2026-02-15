@@ -169,7 +169,7 @@ export default function MaintenancePage() {
                   <div className="flex items-start gap-4">
                     <div>
                       <p className="text-sm font-semibold uppercase text-base-content/60">
-                        {request.category} · Unit {request.unit}
+                        {request.category} · Unit {request.unit} · {request.caseNumber}
                       </p>
                       <p className="text-lg font-semibold">
                         {request.description}
