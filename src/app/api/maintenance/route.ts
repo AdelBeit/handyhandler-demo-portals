@@ -50,7 +50,7 @@ export async function POST(request: Request) {
   const requests = await readMaintenanceRequests();
   const newRequest: MaintenanceRequest = {
     id: `req-${Date.now()}`,
-    dateFiled: new Date().toISOString().slice(0, 10),
+    filedAt: new Date().toISOString(),
     description: payload.description ?? "",
     category: payload.category ?? "",
     unit: payload.unit ?? "",

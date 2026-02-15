@@ -3,7 +3,7 @@ import path from "node:path";
 
 export type MaintenanceRequest = {
   id: string;
-  dateFiled: string;
+  filedAt: string;
   description: string;
   category: string;
   unit: string;
