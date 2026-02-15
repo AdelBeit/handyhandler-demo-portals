@@ -198,6 +198,17 @@ Acceptance Criteria
 
 ---
 
+## MINI-6: Hide Cancel Button When Ineligible
+Status: TODO
+Description
+Hide the Cancel action when a maintenance request is not eligible for cancellation (e.g., already canceled or resolved).
+
+Acceptance Criteria
+1. Cancel button is not rendered for canceled requests.
+2. Cancel button is not rendered for resolved requests.
+
+---
+
 # Gaps To Resolve Before Spike
 
 - G1/G3/G4 removed; handled by current implementation.
