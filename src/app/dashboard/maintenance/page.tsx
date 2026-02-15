@@ -27,6 +27,20 @@ export default function MaintenancePage() {
   );
 
   const hasRequests = useMemo(() => requests.length > 0, [requests]);
+  const formatFiledAt = (value: string) => {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+      return value;
+    }
+    return date.toLocaleString(undefined, {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
 
   useEffect(() => {
     if (!showSuccess) {
@@ -141,7 +155,7 @@ export default function MaintenancePage() {
               if (statusDiff !== 0) {
                 return statusDiff;
               }
-              return b.dateFiled.localeCompare(a.dateFiled);
+              return b.filedAt.localeCompare(a.filedAt);
             })
             .map((request) => {
             const statusKey = request.status.toLowerCase();
@@ -161,7 +175,7 @@ export default function MaintenancePage() {
                         {request.description}
                       </p>
                       <p className="mt-1 text-sm text-base-content/60">
-                        Filed on {request.dateFiled}
+                        Filed on {formatFiledAt(request.filedAt)}
                       </p>
                     </div>
                   </div>
