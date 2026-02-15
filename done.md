@@ -7,4 +7,5 @@
 - [x] HH-MVP-5: Profile Page (Read-Only)
 - [x] HH-MVP-6: Maintenance Data Model + Seed Data
 - [x] HH-MVP-7: Maintenance API Routes
+- [x] HH-MVP-8: Maintenance List Page
 - [x] MINI-3: Make Login the Landing Page

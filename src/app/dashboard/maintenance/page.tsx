@@ -1,14 +1,82 @@
-import { getMaintenanceRequests } from "@/lib/maintenance";
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+
+import type { MaintenanceRequest } from "@/lib/maintenance";
 
 const statusStyles: Record<string, string> = {
   new: "badge-primary",
   "in progress": "badge-secondary",
   resolved: "badge-ghost",
-  canceled: "badge-outline"
+  canceled: "badge-outline",
 };
 
-export default async function MaintenancePage() {
-  const requests = await getMaintenanceRequests();
+export default function MaintenancePage() {
+  type RequestWithAttachments = MaintenanceRequest & {
+    imageUrl?: string | string[] | null;
+  };
+
+  const [requests, setRequests] = useState<RequestWithAttachments[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [busyId, setBusyId] = useState<string | null>(null);
+
+  const hasRequests = useMemo(() => requests.length > 0, [requests]);
+
+  useEffect(() => {
+    let active = true;
+
+    const load = async () => {
+      try {
+        const res = await fetch("/api/maintenance", {
+          headers: { Accept: "application/json" },
+        });
+        if (!res.ok) {
+          throw new Error(`Failed to load requests (${res.status}).`);
+        }
+        const data = (await res.json()) as RequestWithAttachments[];
+        if (active) {
+          setRequests(data);
+          setError(null);
+        }
+      } catch (err) {
+        if (active) {
+          setError(err instanceof Error ? err.message : "Unknown error.");
+        }
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
+      }
+    };
+
+    load();
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const handleCancel = async (id: string) => {
+    setBusyId(id);
+    try {
+      const res = await fetch(`/api/maintenance/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (!res.ok) {
+        throw new Error(`Cancel failed (${res.status}).`);
+      }
+      const updated = (await res.json()) as RequestWithAttachments;
+      setRequests((prev) =>
+        prev.map((item) => (item.id === id ? updated : item)),
+      );
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unknown error.");
+    } finally {
+      setBusyId(null);
+    }
+  };
 
   return (
     <div className="space-y-4">
@@ -18,30 +86,100 @@ export default async function MaintenancePage() {
           Track and manage your maintenance requests.
         </p>
       </div>
-      <div className="grid gap-4">
-        {requests.map((request) => {
-          const statusKey = request.status.toLowerCase();
-          const badgeClass = statusStyles[statusKey] ?? "badge-ghost";
-
-          return (
-            <div key={request.id} className="rounded-box bg-base-200 p-4">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div>
-                  <p className="text-sm font-semibold uppercase text-base-content/60">
-                    {request.category} · Unit {request.unit}
-                  </p>
-                  <p className="text-lg font-semibold">{request.description}</p>
-                </div>
-                <span className={`badge ${badgeClass}`}>{request.status}</span>
-              </div>
-              <p className="mt-2 text-sm text-base-content/60">
-                Filed on {request.dateFiled}
-              </p>
-            </div>
-          );
-        })}
-      </div>
       <button className="btn btn-primary">Create new request</button>
+      {loading ? (
+        <div className="rounded-box bg-base-200 p-6 text-sm text-base-content/70">
+          Loading requests...
+        </div>
+      ) : error ? (
+        <div className="rounded-box border border-error/30 bg-base-200 p-6 text-sm text-error">
+          {error}
+        </div>
+      ) : !hasRequests ? (
+        <div className="rounded-box bg-base-200 p-6 text-sm text-base-content/70">
+          No maintenance requests yet.
+        </div>
+      ) : (
+        <div className="grid gap-4">
+          {requests.map((request) => {
+            const statusKey = request.status.toLowerCase();
+            const badgeClass = statusStyles[statusKey] ?? "badge-ghost";
+            const isCanceled = statusKey === "canceled";
+            const isResolved = statusKey === "resolved";
+
+            return (
+              <div key={request.id} className="rounded-box bg-base-200 p-4">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex items-start gap-4">
+                    <div>
+                      <p className="text-sm font-semibold uppercase text-base-content/60">
+                        {request.category} · Unit {request.unit}
+                      </p>
+                      <p className="text-lg font-semibold">
+                        {request.description}
+                      </p>
+                      <p className="mt-1 text-sm text-base-content/60">
+                        Filed on {request.dateFiled}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className={`badge ${badgeClass}`}>
+                      {request.status}
+                    </span>
+                    <button
+                      className="btn btn-sm btn-outline"
+                      type="button"
+                      disabled={isCanceled || isResolved || busyId === request.id}
+                      onClick={() => handleCancel(request.id)}
+                    >
+                      {busyId === request.id ? "Canceling..." : "Cancel"}
+                    </button>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <p className="text-xs font-semibold uppercase text-base-content/50">
+                    Attachments
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {(() => {
+                      const attachments = Array.isArray(request.imageUrl)
+                        ? request.imageUrl
+                        : request.imageUrl
+                          ? [request.imageUrl]
+                          : [];
+
+                      if (attachments.length === 0) {
+                        return (
+                          <div className="rounded-full bg-base-100 px-3 py-1 text-xs text-base-content/60">
+                            No attachments
+                          </div>
+                        );
+                      }
+
+                      return attachments.map((attachment, index) => (
+                        <div
+                          key={`${request.id}-attachment-${index}`}
+                          className="h-12 w-12 overflow-hidden rounded-lg bg-base-100"
+                          title={attachment ?? "Attachment"}
+                        >
+                          <img
+                            src={attachment}
+                            alt="Attachment thumbnail"
+                            className="h-full w-full object-cover"
+                            loading="lazy"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                      ));
+                    })()}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

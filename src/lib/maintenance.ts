@@ -8,7 +8,7 @@ export type MaintenanceRequest = {
   category: string;
   unit: string;
   status: string;
-  imageUrl: string | null;
+  imageUrl: string | string[] | null;
 };
 
 const dataFilePath = path.join(process.cwd(), "data", "maintenance.json");

@@ -6,7 +6,10 @@
     "category": "Plumbing",
     "unit": "3B",
     "status": "New",
-    "imageUrl": null
+    "imageUrl": [
+      "/images/leakyfaucet.png",
+      "/images/leakyfaucet.png"
+    ]
   },
   {
     "id": "req-1002",
@@ -15,7 +18,9 @@
     "category": "Electrical",
     "unit": "3B",
     "status": "In Progress",
-    "imageUrl": null
+    "imageUrl": [
+      "/images/leakyfaucet.png"
+    ]
   },
   {
     "id": "req-1003",
@@ -24,7 +29,11 @@
     "category": "HVAC",
     "unit": "3B",
     "status": "Resolved",
-    "imageUrl": null
+    "imageUrl": [
+      "/images/leakyfaucet.png",
+      "/images/leakyfaucet.png",
+      "/images/leakyfaucet.png"
+    ]
   },
   {
     "id": "req-1771116235993",
