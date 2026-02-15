@@ -19,5 +19,5 @@ export default async function Home({ searchParams }: HomeProps) {
   }
 
   const queryString = params.toString();
-  redirect(queryString ? `/login?${queryString}` : "/login");
+  redirect(queryString ? `/dashboard?${queryString}` : "/dashboard");
 }

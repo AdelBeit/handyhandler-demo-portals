@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 
-export async function POST() {
-  const response = NextResponse.json({ ok: true });
+const clearSessionCookie = (response: NextResponse) => {
   response.cookies.set({
     name: "demo_auth",
     value: "",
@@ -12,4 +11,14 @@ export async function POST() {
     maxAge: 0,
   });
   return response;
+};
+
+export async function GET(request: Request) {
+  const url = new URL("/login", request.url);
+  return clearSessionCookie(NextResponse.redirect(url));
+}
+
+export async function POST(request: Request) {
+  const url = new URL("/login", request.url);
+  return clearSessionCookie(NextResponse.redirect(url));
 }
