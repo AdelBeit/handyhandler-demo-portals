@@ -188,7 +188,7 @@ Acceptance Criteria
 ---
 
 ## MINI-5: Add Maintenance Case Number
-Status: IN PROGRESS
+Status: IN REVIEW
 Description
 Add a case number field to maintenance requests and populate it in seed data.
 
