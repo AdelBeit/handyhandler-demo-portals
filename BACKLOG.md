@@ -3,7 +3,7 @@
 ## Active TODO
 
 ## MINI-7: Stabilize Dropzone Loading State
-Status: TODO
+Status: IN PROGRESS
 Description
 Avoid layout shift on the new request page by rendering a stable loading state for the dropzone.
 
