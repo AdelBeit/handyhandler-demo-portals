@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 export type MaintenanceRequest = {
@@ -11,8 +11,20 @@ export type MaintenanceRequest = {
   imageUrl: string | null;
 };
 
-export async function getMaintenanceRequests(): Promise<MaintenanceRequest[]> {
-  const filePath = path.join(process.cwd(), "data", "maintenance.json");
-  const file = await readFile(filePath, "utf-8");
+const dataFilePath = path.join(process.cwd(), "data", "maintenance.json");
+
+export async function readMaintenanceRequests(): Promise<MaintenanceRequest[]> {
+  const file = await readFile(dataFilePath, "utf-8");
   return JSON.parse(file) as MaintenanceRequest[];
+}
+
+export async function writeMaintenanceRequests(
+  requests: MaintenanceRequest[],
+): Promise<void> {
+  const payload = `${JSON.stringify(requests, null, 2)}\n`;
+  await writeFile(dataFilePath, payload, "utf-8");
+}
+
+export async function getMaintenanceRequests(): Promise<MaintenanceRequest[]> {
+  return readMaintenanceRequests();
 }
