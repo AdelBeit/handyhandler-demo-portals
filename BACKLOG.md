@@ -3,7 +3,7 @@
 ## Active TODO
 
 ## MINI-7: Stabilize Dropzone Loading State
-Status: IN REVIEW
+Status: DONE
 Description
 Avoid layout shift on the new request page by rendering a stable loading state for the dropzone.
 
@@ -11,7 +11,7 @@ Acceptance Criteria
 1. A fixed-size dropzone placeholder renders immediately.
 2. The interactive dropzone replaces it without shifting layout.
 ## MINI-8: Reduce Dropzone Re-renders
-Status: IN REVIEW
+Status: DONE
 Description
 Ensure the dropzone component does not re-render on every input change; isolate state so only affected components update.
 
