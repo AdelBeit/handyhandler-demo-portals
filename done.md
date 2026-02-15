@@ -13,4 +13,5 @@
 - [x] HH-MVP-11: Attachment Uploads (Demo Storage)
 - [x] MINI-4: Store Timestamps for Maintenance Requests
 - [x] MINI-5: Add Maintenance Case Number
+- [x] MINI-6: Hide Cancel Button When Ineligible
 - [x] MINI-3: Make Login the Landing Page

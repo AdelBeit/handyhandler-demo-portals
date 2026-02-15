@@ -199,7 +199,7 @@ Acceptance Criteria
 ---
 
 ## MINI-6: Hide Cancel Button When Ineligible
-Status: IN REVIEW
+Status: DONE
 Description
 Hide the Cancel action when a maintenance request is not eligible for cancellation (e.g., already canceled or resolved).
 
@@ -217,6 +217,17 @@ Avoid layout shift on the new request page by rendering a stable loading state f
 Acceptance Criteria
 1. A fixed-size dropzone placeholder renders immediately.
 2. The interactive dropzone replaces it without shifting layout.
+
+---
+
+## MINI-8: Reduce Dropzone Re-renders
+Status: TODO
+Description
+Ensure the dropzone component does not re-render on every input change; isolate state so only affected components update.
+
+Acceptance Criteria
+1. Typing in text inputs does not re-render the dropzone.
+2. Dropzone rerenders only when its own state changes.
 
 ---
 
