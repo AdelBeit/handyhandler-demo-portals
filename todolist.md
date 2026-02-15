@@ -199,13 +199,24 @@ Acceptance Criteria
 ---
 
 ## MINI-6: Hide Cancel Button When Ineligible
-Status: TODO
+Status: IN REVIEW
 Description
 Hide the Cancel action when a maintenance request is not eligible for cancellation (e.g., already canceled or resolved).
 
 Acceptance Criteria
 1. Cancel button is not rendered for canceled requests.
 2. Cancel button is not rendered for resolved requests.
+
+---
+
+## MINI-7: Stabilize Dropzone Loading State
+Status: TODO
+Description
+Avoid layout shift on the new request page by rendering a stable loading state for the dropzone.
+
+Acceptance Criteria
+1. A fixed-size dropzone placeholder renders immediately.
+2. The interactive dropzone replaces it without shifting layout.
 
 ---
 
