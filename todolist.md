@@ -125,7 +125,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-11: Attachment Uploads (Demo Storage)
-Status: IN REVIEW
+Status: DONE
 Description
 Allow uploading attachment images and store them locally for demo usage.
 

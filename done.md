@@ -10,4 +10,5 @@
 - [x] HH-MVP-8: Maintenance List Page
 - [x] HH-MVP-9: New Request Page
 - [x] HH-MVP-10: Status Conventions
+- [x] HH-MVP-11: Attachment Uploads (Demo Storage)
 - [x] MINI-3: Make Login the Landing Page
