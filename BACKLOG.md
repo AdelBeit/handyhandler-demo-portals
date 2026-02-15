@@ -3,7 +3,7 @@
 ## Active TODO
 
 ## MINI-7: Stabilize Dropzone Loading State
-Status: TODO
+Status: IN REVIEW
 Description
 Avoid layout shift on the new request page by rendering a stable loading state for the dropzone.
 
@@ -11,7 +11,7 @@ Acceptance Criteria
 1. A fixed-size dropzone placeholder renders immediately.
 2. The interactive dropzone replaces it without shifting layout.
 ## MINI-8: Reduce Dropzone Re-renders
-Status: TODO
+Status: IN REVIEW
 Description
 Ensure the dropzone component does not re-render on every input change; isolate state so only affected components update.
 
@@ -31,6 +31,16 @@ Acceptance Criteria
 2. Secondary sort uses the timestamp field and is descending.
 
 ---
+
+## MINI-10: Multi-Attachment Uploads & Review
+Status: TODO
+Description
+Allow attaching and submitting multiple files, show all attachments pre-submit, and allow removing attachments before submit.
+
+Acceptance Criteria
+1. User can attach multiple files and all are uploaded on submit.
+2. Pre-submit list shows all attachments (use thumbnails like the maintenance list if possible).
+3. User can remove an attachment before submission.
 
 ## Backlog & Notes
 
