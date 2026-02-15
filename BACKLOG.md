@@ -10,7 +10,9 @@ Block unauthenticated users from accessing dashboard routes; require login to vi
 Acceptance Criteria
 1. Unauthenticated users are redirected to `/login` when visiting dashboard routes.
 2. Authenticated users can access dashboard routes without manual redirects.
-3. Session persists across refreshes for a reasonable duration.
+3. Session persists across refreshes for a reasonable duration (cookie-based).
+4. Login sets a signed, HTTP-only session cookie; logout clears it.
+5. Middleware guards `/dashboard/:path*` and skips `/login` and static assets.
 
 ## Backlog & Notes
 
@@ -56,25 +58,10 @@ MVP scope note: single portal only. Multi-portal selector, branding variants, an
 
 ---
 
-## Maintenance List Behavior
-- Decide default sort (newest first) and whether filters/tabs are needed.
-- Decide if list items expand to show details or open a detail panel.
-- Define how image previews appear (thumbnail grid, single thumbnail, placeholder).
-- Decide on empty state and “no requests” messaging.
-
----
-
 ## New Request Flow (MVP is dummy)
 - MVP requirement: “New Request” opens as a dedicated page (traditional portal flow).
 - Determine field validation requirements (if any) for MVP.
 - Decide whether the submit action just shows a toast or adds a fake item to list.
-
----
-
-## Dummy Data & Content
-- Provide 3–5 seeded requests per portal (names, dates, statuses, descriptions).
-- Provide consistent units/locations (e.g., “Unit 3B”) to make lists realistic.
-- Decide on placeholder images or branded maintenance icons.
 
 ---
 
