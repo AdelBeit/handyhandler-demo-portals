@@ -146,7 +146,6 @@ export default function MaintenancePage() {
                 new: 0,
                 resolved: 1,
                 canceled: 2,
-                cancelled: 2,
               };
               const aStatus = a.status.toLowerCase();
               const bStatus = b.status.toLowerCase();
@@ -155,7 +154,9 @@ export default function MaintenancePage() {
               if (statusDiff !== 0) {
                 return statusDiff;
               }
-              return b.filedAt.localeCompare(a.filedAt);
+              return (
+                new Date(b.filedAt).getTime() - new Date(a.filedAt).getTime()
+              );
             })
             .map((request) => {
             const statusKey = request.status.toLowerCase();
