@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 
@@ -22,15 +22,56 @@ const AttachmentDropzone = dynamic(
 const categories = ["Plumbing", "Electrical", "HVAC", "Appliance"] as const;
 
 export default function NewMaintenanceRequestPage() {
+  type AttachmentPreview = {
+    id: string;
+    file: File;
+    previewUrl: string;
+  };
+
   const router = useRouter();
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState(categories[0]);
-  const [attachments, setAttachments] = useState<File[]>([]);
+  const [attachments, setAttachments] = useState<AttachmentPreview[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const attachmentsRef = useRef<AttachmentPreview[]>([]);
   const unit = "3B";
+  const attachmentCount = useMemo(() => attachments.length, [attachments]);
+
   const handleFilesChange = useCallback((files: File[]) => {
-    setAttachments(files);
+    if (files.length === 0) {
+      return;
+    }
+    setAttachments((prev) => [
+      ...prev,
+      ...files.map((file) => ({
+        id: `${file.name}-${file.lastModified}-${file.size}`,
+        file,
+        previewUrl: URL.createObjectURL(file),
+      })),
+    ]);
+  }, []);
+
+  const removeAttachment = useCallback((id: string) => {
+    setAttachments((prev) => {
+      const target = prev.find((item) => item.id === id);
+      if (target) {
+        URL.revokeObjectURL(target.previewUrl);
+      }
+      return prev.filter((item) => item.id !== id);
+    });
+  }, []);
+
+  useEffect(() => {
+    attachmentsRef.current = attachments;
+  }, [attachments]);
+
+  useEffect(() => {
+    return () => {
+      attachmentsRef.current.forEach((attachment) => {
+        URL.revokeObjectURL(attachment.previewUrl);
+      });
+    };
   }, []);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -39,19 +80,25 @@ export default function NewMaintenanceRequestPage() {
     setError(null);
 
     try {
-      let uploadedUrl: string | null = null;
+      let uploadedUrls: string[] = [];
       if (attachments.length > 0) {
-        const formData = new FormData();
-        formData.append("file", attachments[0]);
-        const uploadRes = await fetch("/api/maintenance/upload", {
-          method: "POST",
-          body: formData,
-        });
-        if (!uploadRes.ok) {
-          throw new Error(`Upload failed (${uploadRes.status}).`);
+        const results: string[] = [];
+        for (const attachment of attachments) {
+          const formData = new FormData();
+          formData.append("file", attachment.file);
+          const uploadRes = await fetch("/api/maintenance/upload", {
+            method: "POST",
+            body: formData,
+          });
+          if (!uploadRes.ok) {
+            throw new Error(`Upload failed (${uploadRes.status}).`);
+          }
+          const uploadPayload = (await uploadRes.json()) as { url?: string };
+          if (uploadPayload.url) {
+            results.push(uploadPayload.url);
+          }
         }
-        const uploadPayload = (await uploadRes.json()) as { url?: string };
-        uploadedUrl = uploadPayload.url ?? null;
+        uploadedUrls = results;
       }
 
       const response = await fetch("/api/maintenance", {
@@ -61,7 +108,7 @@ export default function NewMaintenanceRequestPage() {
           description,
           category,
           unit,
-          imageUrl: uploadedUrl,
+          imageUrl: uploadedUrls.length > 0 ? uploadedUrls : null,
         }),
       });
 
@@ -136,12 +183,36 @@ export default function NewMaintenanceRequestPage() {
           </div>
           <AttachmentDropzone onFilesChange={handleFilesChange} />
           <div className="mt-2 text-sm text-base-content/60">
-            {attachments.length > 0 ? (
-              <ul className="list-disc pl-5">
-                {attachments.map((file) => (
-                  <li key={file.name}>{file.name}</li>
+            {attachmentCount > 0 ? (
+              <div className="flex flex-wrap gap-2">
+                {attachments.map((attachment) => (
+                  <div
+                    key={attachment.id}
+                    className="flex items-center gap-2 rounded-box border border-base-content/10 bg-base-200 p-2"
+                  >
+                    <div className="h-12 w-12 overflow-hidden rounded-lg bg-base-100">
+                      <img
+                        src={attachment.previewUrl}
+                        alt={attachment.file.name}
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="truncate text-sm text-base-content">
+                        {attachment.file.name}
+                      </p>
+                      <button
+                        type="button"
+                        className="btn btn-ghost btn-xs"
+                        onClick={() => removeAttachment(attachment.id)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
                 ))}
-              </ul>
+              </div>
             ) : (
               "No attachments"
             )}
