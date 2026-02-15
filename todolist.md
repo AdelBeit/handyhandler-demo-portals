@@ -175,6 +175,18 @@ Notes
 
 ---
 
+## MINI-4: Store Timestamps for Maintenance Requests
+Status: TODO
+Description
+Store request timestamps with date and time (e.g., ISO 8601) so the UI can format as needed (including hours/minutes and AM/PM).
+
+Acceptance Criteria
+1. Maintenance requests include a timestamp field (ISO 8601 or equivalent).
+2. New requests persist the timestamp (not just the date).
+3. Existing seed data updated to include timestamps.
+
+---
+
 # Gaps To Resolve Before Spike
 
 ---
