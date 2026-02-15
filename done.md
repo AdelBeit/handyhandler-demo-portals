@@ -9,4 +9,5 @@
 - [x] HH-MVP-7: Maintenance API Routes
 - [x] HH-MVP-8: Maintenance List Page
 - [x] HH-MVP-9: New Request Page
+- [x] HH-MVP-10: Status Conventions
 - [x] MINI-3: Make Login the Landing Page
