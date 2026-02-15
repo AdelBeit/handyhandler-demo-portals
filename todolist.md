@@ -88,7 +88,7 @@ Acceptance Criteria
 ---
 
 ## HH-MVP-8: Maintenance List Page
-Status: IN PROGRESS
+Status: IN REVIEW
 Description
 Create `/dashboard/maintenance` that displays requests and allows canceling.
 
