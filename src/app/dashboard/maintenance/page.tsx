@@ -7,7 +7,6 @@ import type { MaintenanceRequest } from "@/lib/maintenance";
 
 const statusStyles: Record<string, string> = {
   new: "badge-primary",
-  "in progress": "badge-secondary",
   resolved: "badge-ghost",
   canceled: "badge-outline",
 };
@@ -131,10 +130,9 @@ export default function MaintenancePage() {
             .sort((a, b) => {
               const order: Record<string, number> = {
                 new: 0,
-                "in progress": 1,
-                resolved: 2,
-                canceled: 3,
-                cancelled: 3,
+                resolved: 1,
+                canceled: 2,
+                cancelled: 2,
               };
               const aStatus = a.status.toLowerCase();
               const bStatus = b.status.toLowerCase();
