@@ -148,7 +148,7 @@ Acceptance Criteria
 ---
 
 ## MINI-3: Make Login the Landing Page
-Status: IN PROGRESS
+Status: IN REVIEW
 Description
 Redirect `/` visitors to `/login` so the portal entry point is the dummy login screen before exposing dashboard navigation.
 
