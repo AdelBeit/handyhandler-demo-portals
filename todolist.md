@@ -3,7 +3,7 @@
 ---
 
 ## MINI-9: Sort Requests by Date Desc
-Status: IN REVIEW
+Status: DONE
 Description
 Ensure maintenance requests are grouped by category and then sorted newest to oldest by timestamp within each category.
 
@@ -14,7 +14,7 @@ Acceptance Criteria
 ---
 
 ## MINI-10: Multi-Attachment Uploads & Review
-Status: IN REVIEW
+Status: DONE
 Description
 Allow attaching and submitting multiple files, show all attachments pre-submit, and allow removing attachments before submit.
 
