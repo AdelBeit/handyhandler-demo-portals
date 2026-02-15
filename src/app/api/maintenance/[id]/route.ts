@@ -8,14 +8,15 @@ import {
 export const dynamic = "force-dynamic";
 
 type RouteParams = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export async function PATCH(_request: Request, { params }: RouteParams) {
+  const { id } = await params;
   const requests = await readMaintenanceRequests();
-  const target = requests.find((item) => item.id === params.id);
+  const target = requests.find((item) => item.id === id);
 
   if (!target) {
     return NextResponse.json(
