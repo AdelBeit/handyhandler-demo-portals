@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 
+import LogoutButton from "@/components/LogoutButton";
+
 const navItems = [
   { href: "/dashboard", label: "Overview" },
   { href: "/dashboard/profile", label: "Profile" },
@@ -20,7 +22,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           </div>
           <div className="flex items-center gap-3">
             <span className="badge badge-outline">Tenant</span>
-            <button className="btn btn-sm btn-ghost">Sign out</button>
+            <LogoutButton />
           </div>
         </div>
       </header>

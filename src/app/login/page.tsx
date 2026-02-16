@@ -1,13 +1,38 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    router.push("/dashboard");
+    setSubmitting(true);
+    setError(null);
+
+    const formData = new FormData(event.currentTarget);
+    const email = String(formData.get("email") ?? "");
+
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (!response.ok) {
+        throw new Error(`Login failed (${response.status}).`);
+      }
+      const nextPath = searchParams?.get("next");
+      router.push(nextPath && nextPath.startsWith("/dashboard") ? nextPath : "/dashboard");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Login failed.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -45,6 +70,7 @@ export default function LoginPage() {
                   </label>
                   <input
                     id="email"
+                    name="email"
                     type="email"
                     className="input input-bordered w-full"
                     placeholder="you@example.com"
@@ -60,20 +86,30 @@ export default function LoginPage() {
                   </label>
                   <input
                     id="password"
+                    name="password"
                     type="password"
                     className="input input-bordered w-full"
                     placeholder="••••••••"
                     required
                   />
                 </div>
+                {error ? (
+                  <div className="rounded-box border border-error/30 bg-base-200 p-3 text-sm text-error">
+                    {error}
+                  </div>
+                ) : null}
                 <div className="form-control">
                   <label className="label cursor-pointer justify-start gap-3">
                     <input type="checkbox" className="checkbox" />
                     <span className="label-text">Remember this device</span>
                   </label>
                 </div>
-                <button type="submit" className="btn btn-primary w-full">
-                  Sign in
+                <button
+                  type="submit"
+                  className="btn btn-primary w-full"
+                  disabled={submitting}
+                >
+                  {submitting ? "Signing in..." : "Sign in"}
                 </button>
               </form>
               <div className="divider">Need access?</div>

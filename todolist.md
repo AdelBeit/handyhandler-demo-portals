@@ -22,3 +22,17 @@ Acceptance Criteria
 1. User can attach multiple files and all are uploaded on submit.
 2. Pre-submit list shows all attachments (use thumbnails like the maintenance list if possible).
 3. User can remove an attachment before submission.
+
+---
+
+## AUTH-1: Require Authenticated Sessions
+Status: IN REVIEW
+Description
+Block unauthenticated users from accessing dashboard routes; require login to view `/dashboard/*`.
+
+Acceptance Criteria
+1. Unauthenticated users are redirected to `/login` when visiting dashboard routes.
+2. Authenticated users can access dashboard routes without manual redirects.
+3. Session persists across refreshes for a reasonable duration (cookie-based).
+4. Login sets a signed, HTTP-only session cookie; logout clears it.
+5. Middleware guards `/dashboard/:path*` and skips `/login` and static assets.
