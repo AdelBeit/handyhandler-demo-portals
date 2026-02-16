@@ -3,7 +3,7 @@
 ## Active TODO
 
 ## AUTH-1: Require Authenticated Sessions
-Status: TODO
+Status: DONE
 Description
 Block unauthenticated users from accessing dashboard routes; require login to view `/dashboard/*`.
 
