@@ -2,18 +2,6 @@
 
 ## Active TODO
 
-## AUTH-1: Require Authenticated Sessions
-Status: DONE
-Description
-Block unauthenticated users from accessing dashboard routes; require login to view `/dashboard/*`.
-
-Acceptance Criteria
-1. Unauthenticated users are redirected to `/login` when visiting dashboard routes.
-2. Authenticated users can access dashboard routes without manual redirects.
-3. Session persists across refreshes for a reasonable duration (cookie-based).
-4. Login sets a signed, HTTP-only session cookie; logout clears it.
-5. Middleware guards `/dashboard/:path*` and skips `/login` and static assets.
-
 ## Backlog & Notes
 
 # Portal Demo Backlog (Gaps & Extensions)
