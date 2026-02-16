@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -26,8 +25,19 @@ export default function LoginPage() {
       if (!response.ok) {
         throw new Error(`Login failed (${response.status}).`);
       }
-      const nextPath = searchParams?.get("next");
-      router.push(nextPath && nextPath.startsWith("/dashboard") ? nextPath : "/dashboard");
+      const referrer = typeof document !== "undefined" ? document.referrer : "";
+      let nextPath = "/dashboard";
+      if (referrer) {
+        try {
+          const referrerUrl = new URL(referrer);
+          if (referrerUrl.origin === window.location.origin && referrerUrl.pathname.startsWith("/dashboard")) {
+            nextPath = referrerUrl.pathname + referrerUrl.search + referrerUrl.hash;
+          }
+        } catch {
+          // Ignore invalid referrer.
+        }
+      }
+      router.push(nextPath);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed.");
     } finally {
