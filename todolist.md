@@ -26,7 +26,7 @@ Acceptance Criteria
 ---
 
 ## AUTH-1: Require Authenticated Sessions
-Status: IN REVIEW
+Status: DONE
 Description
 Block unauthenticated users from accessing dashboard routes; require login to view `/dashboard/*`.
 

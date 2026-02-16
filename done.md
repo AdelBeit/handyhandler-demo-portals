@@ -17,5 +17,6 @@
 - [x] MINI-7: Stabilize Dropzone Loading State
 - [x] MINI-8: Reduce Dropzone Re-renders
 - [x] MINI-3: Make Login the Landing Page
+- [x] AUTH-1: Require Authenticated Sessions
 - [x] MINI-9: Sort Requests by Date Desc
 - [x] MINI-10: Multi-Attachment Uploads & Review
